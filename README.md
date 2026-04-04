@@ -1,2 +1,2 @@
-# planeteers-landing-page
-Planeteers landing page the real one
+# Planeteers
+Planeteers landing page
