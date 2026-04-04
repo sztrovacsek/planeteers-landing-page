@@ -11,16 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --earth: #2d5016;
-      --moss: #4a7c2f;
-      --leaf: #7ab648;
-      --sun: #f5c842;
-      --sky: #d4ecd4;
-      --sand: #f7f0e0;
-      --bark: #3d2b1a;
+      --earth: #60a35c; /* main green */
+      --moss: #396237; /* main green but darker */
+      --mist: #dfecdf; /* main green but lighter */
+      --leaf: #7cc577;  /* green */
+      --sky: #b3e3f6;  /* blue */
+      --sun: #f9d24b;  /* yellow */
+      --coral: #f59a72;  /* red */
+      --black: #040503;  /* black */
       --warm: #e8dcc8;
-      --coral: #e06b3a;
-      --cream: #faf6ee;
+      --sand: #f7f0e0;
+      --cream: #fefbf3;  /* bg cream */
     }
 
     html { scroll-behavior: smooth; }
@@ -28,7 +29,7 @@
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
-      color: var(--bark);
+      color: var(--black);
       overflow-x: hidden;
     }
 
@@ -52,7 +53,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 3rem;
-      background: rgba(250, 246, 238, 0.85);
+      background: var(--cream);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(74, 124, 47, 0.12);
     }
@@ -75,7 +76,7 @@
 
     nav ul a {
       text-decoration: none;
-      color: var(--bark);
+      color: var(--black);
       font-size: 0.9rem;
       font-weight: 500;
       opacity: 0.75;
@@ -142,7 +143,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--sky);
+      background: var(--mist);
       color: var(--earth);
       font-size: 0.78rem;
       font-weight: 600;
@@ -173,7 +174,7 @@
     .hero-sub {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: var(--bark);
+      color: var(--black);
       opacity: 0.8;
       max-width: 500px;
       margin-bottom: 2.5rem;
@@ -303,7 +304,7 @@
 
     .badge {
       background: white;
-      border: 2px solid var(--sky);
+      border: 2px solid var(--mist);
       border-radius: 100px;
       padding: 0.3rem 0.85rem;
       font-size: 0.72rem;
@@ -465,7 +466,7 @@
 
     /* ── TESTIMONIALS ── */
     .testimonials {
-      background: var(--sky);
+      background: var(--mist);
       padding: 5rem 3rem;
     }
 
@@ -538,7 +539,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
       background: white;
-      color: var(--bark);
+      color: var(--black);
       outline: none;
       transition: border-color 0.2s;
     }
@@ -568,8 +569,8 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--bark);
-      color: var(--cream);
+      background: var(--sky);
+      color: var(--black);
       padding: 2.5rem 3rem;
       display: flex;
       align-items: center;
@@ -590,7 +591,7 @@
     }
 
     footer nav ul { gap: 1.5rem; }
-    footer nav ul a { font-size: 0.82rem; color: var(--cream); }
+    footer nav ul a { font-size: 0.82rem; color: var(--black); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -628,7 +629,7 @@
   <section class="hero">
     <div class="hero-text">
       <div class="hero-tag">Sustainability Education in Primary Schools · Ages 7-11</div>
-      <h1>Where kids play the planet back to balance</h1>
+      <h1>Where kids play <em>the planet</em> back to balance</h1>
       <blockquote class="hero-quote">
         "The world needs a life balanced with money, humans, and nature."
         <cite>— A 7-year-old, after playing Planeteers</cite>
@@ -731,20 +732,22 @@
     </div>
   </section>
 
-  <!-- JOIN
+  <!-- JOIN -->
   <section id="join" class="join-section">
     <div class="join-inner">
       <p class="section-tag">Join the movement</p>
       <h2>Education should feel like play.</h2>
       <p>If you believe learning should be inspirational and memorable — whether you're a teacher, school, investor, or just a human who cares — we'd love to have you with us.</p>
+      <p>Reach out to Parinitha Mundra: pari.vish24@gmail.com</p>
+      <!--
       <div class="email-form">
         <input type="email" placeholder="your@school.edu" />
         <button type="button">Stay in the loop</button>
       </div>
       <p class="join-note">No spam. Just meaningful updates as we grow. 🌱</p>
     </div>
+    -->
   </section>
-   -->
 
   <!-- FOOTER -->
   <footer>
