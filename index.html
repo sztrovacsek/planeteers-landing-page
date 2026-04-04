@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planeteers — an educational boardgame on sustainability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --earth: #2d5016;
+      --moss: #4a7c2f;
+      --leaf: #7ab648;
+      --sun: #f5c842;
+      --sky: #d4ecd4;
+      --sand: #f7f0e0;
+      --bark: #3d2b1a;
+      --warm: #e8dcc8;
+      --coral: #e06b3a;
+      --cream: #faf6ee;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--bark);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(250, 246, 238, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(74, 124, 47, 0.12);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--earth);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--leaf); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--bark);
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    nav ul a:hover { opacity: 1; }
+
+    .nav-cta {
+      background: var(--earth);
+      color: var(--cream) !important;
+      opacity: 1 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--moss) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 3rem 5rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 110%;
+      background: radial-gradient(ellipse at 70% 40%, #c9e8a0 0%, #a8d870 30%, #7ab64830 70%, transparent 100%);
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite;
+    }
+
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+      33% { transform: translate(20px, -30px) rotate(4deg); border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%; }
+      66% { transform: translate(-15px, 20px) rotate(-3deg); border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%; }
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--sky);
+      color: var(--earth);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-tag::before { content: '🌱'; font-size: 1rem; }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--earth);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--coral);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--bark);
+      opacity: 0.8;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-quote {
+      border-left: 3px solid var(--leaf);
+      padding-left: 1.2rem;
+      margin-bottom: 2.5rem;
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--earth);
+      opacity: 0.9;
+    }
+
+    .hero-quote cite {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--moss);
+      margin-top: 0.5rem;
+    }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--earth);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--moss); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-block;
+      border: 2px solid var(--earth);
+      color: var(--earth);
+      text-decoration: none;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--earth); color: var(--cream); transform: translateY(-2px); }
+
+    /* ── HERO ILLUSTRATION ── */
+    .hero-visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .game-board {
+      width: min(420px, 100%);
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .board-bg {
+      width: 100%;
+      height: 100%;
+      background: var(--warm);
+      border-radius: 28px;
+      border: 3px solid rgba(74,124,47,0.2);
+      box-shadow: 0 30px 80px rgba(45, 80, 22, 0.18), 0 2px 0 rgba(255,255,255,0.8) inset;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .board-cell {
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+      animation: cellPop 0.6s ease both;
+    }
+
+    .board-cell:hover { transform: scale(1.06) rotate(2deg); }
+
+    .board-cell:nth-child(1) { animation-delay: 0.1s; background: #d4f0b0; }
+    .board-cell:nth-child(2) { animation-delay: 0.2s; background: #fde9c0; }
+    .board-cell:nth-child(3) { animation-delay: 0.3s; background: #c8e8f8; }
+    .board-cell:nth-child(4) { animation-delay: 0.4s; background: #f8d8c0; }
+    .board-cell:nth-child(5) { animation-delay: 0.5s; background: var(--earth); font-size: 1.4rem; color: var(--cream); font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem; }
+    .board-cell:nth-child(6) { animation-delay: 0.6s; background: #e0d4f8; }
+    .board-cell:nth-child(7) { animation-delay: 0.7s; background: #c8f0e0; }
+    .board-cell:nth-child(8) { animation-delay: 0.8s; background: #f8e8c0; }
+    .board-cell:nth-child(9) { animation-delay: 0.9s; background: #f0c8c8; }
+
+    @keyframes cellPop {
+      from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .board-badges {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .badge {
+      background: white;
+      border: 2px solid var(--sky);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--earth);
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--earth);
+      color: var(--cream);
+      padding: 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--sun);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      opacity: 0.75;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--leaf);
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--earth);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-lead {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.75;
+      max-width: 600px;
+      margin-bottom: 3.5rem;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pillar {
+      background: var(--sand);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(74,124,47,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(45,80,22,0.12);
+    }
+
+    .pillar-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .pillar h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--earth);
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar p {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      opacity: 0.75;
+    }
+
+    /* ── FOR TEACHERS ── */
+    .teachers-section {
+      background: var(--earth);
+      color: var(--cream);
+      padding: 6rem 3rem;
+    }
+
+    .teachers-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .teachers-section .section-tag { color: var(--sun); }
+    .teachers-section h2 { color: var(--cream); }
+    .teachers-section .section-lead { color: var(--cream); opacity: 0.8; margin-bottom: 0; }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--cream);
+      opacity: 0.9;
+    }
+
+    .feat-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--sky);
+      padding: 5rem 3rem;
+    }
+
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials .section-tag { text-align: center; }
+    .testimonials h2 { text-align: center; margin-bottom: 3rem; }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .test-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(45,80,22,0.07);
+    }
+
+    .test-quote {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--earth);
+      margin-bottom: 1.25rem;
+    }
+
+    .test-card .test-quote::before { content: '"'; font-size: 2rem; line-height: 0; vertical-align: -0.5rem; color: var(--leaf); margin-right: 2px; }
+
+    .test-author {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--moss);
+    }
+
+    /* ── JOIN ── */
+    .join-section {
+      padding: 7rem 3rem;
+      text-align: center;
+    }
+
+    .join-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .join-section h2 { margin-bottom: 1.2rem; }
+    .join-section p { font-size: 1.1rem; line-height: 1.7; opacity: 0.75; margin-bottom: 2.5rem; }
+
+    .email-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 480px;
+      margin: 0 auto 1rem;
+    }
+
+    .email-form input {
+      flex: 1;
+      padding: 0.9rem 1.4rem;
+      border: 2px solid rgba(74,124,47,0.25);
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: white;
+      color: var(--bark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input:focus { border-color: var(--leaf); }
+
+    .email-form button {
+      background: var(--earth);
+      color: var(--cream);
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .email-form button:hover { background: var(--moss); }
+
+    .join-note {
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      color: var(--cream);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+
+    .footer-logo span { color: var(--leaf); }
+
+    footer p {
+      font-size: 0.82rem;
+      opacity: 0.5;
+    }
+
+    footer nav ul { gap: 1.5rem; }
+    footer nav ul a { font-size: 0.82rem; color: var(--cream); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+      .hero::after { display: none; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+      .pillars { grid-template-columns: 1fr; }
+      .teachers-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .test-grid { grid-template-columns: 1fr; }
+      .section { padding: 4rem 1.5rem; }
+      .teachers-section { padding: 4rem 1.5rem; }
+      .testimonials { padding: 4rem 1.5rem; }
+      .join-section { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .email-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Planet<span>eers</span></div>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#teachers">For Teachers</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#join" class="nav-cta">Get Notified</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-tag">Sustainability Education in Primary Schools · Ages 7-11</div>
+      <h1>Where kids play the planet back to balance</h1>
+      <blockquote class="hero-quote">
+        "The world needs a life balanced with money, humans, and nature."
+        <cite>— A 7-year-old, after playing Planeteers</cite>
+      </blockquote>
+      <p class="hero-sub">A discussion-based board game that teaches children to navigate the real trade-offs between cost, health, and the environment — through play, not lectures.</p>
+      <div class="btn-group">
+        <a href="#demo" class="btn-primary">See the demo →</a>
+        <a href="#story" class="btn-secondary">Our story</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="game-board">
+        <div class="board-bg">
+          <div class="board-cell">🌳</div>
+          <div class="board-cell">😊</div>
+          <div class="board-cell">🌳</div>
+          <div class="board-cell">😊</div>
+          <div class="board-cell">💵</div>
+          <div class="board-cell">🌳</div>
+          <div class="board-cell">💵</div>
+          <div class="board-cell">🌳</div>
+          <div class="board-cell">😊</div>
+        </div>
+        <div class="board-badges">
+          <span class="badge">💵  Cost</span>
+          <span class="badge">😊  Health</span>
+          <span class="badge">🌳  Planet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">ETH</div>
+      <div class="stat-label">Prototyped in ETH Zurich</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4×</div>
+      <div class="stat-label">Tested in schools</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2026</div>
+      <div class="stat-label">Founded in 2026</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="section">
+    <p class="section-tag">How it works</p>
+    <h2>No right answers.<br/>Just real conversations.</h2>
+    <p class="section-lead">Planeteers puts children at the center of meaningful choices — the same kinds of choices our planet faces every day. The discussion it sparks is the lesson.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-icon">🎲</span>
+        <h3>Play-based learning</h3>
+        <p>Children explore trade-offs between cost, health, and the environment through guided gameplay. Complex global challenges become tangible and surprisingly intuitive.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">💬</span>
+        <h3>Discussion-first design</h3>
+        <p>Every round opens a conversation. There are no wrong moves — just choices, consequences, and the chance to think differently. Critical thinking emerges naturally.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🧩</span>
+        <h3>Modular & adaptable</h3>
+        <p>Designed for different cultures, languages, and curricula. Expansion packs deepen the experience. One game, endless contexts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR TEACHERS -->
+  <section id="teachers" class="teachers-section">
+    <div class="teachers-inner">
+      <div>
+        <p class="section-tag">For teachers</p>
+        <h2>Built for classrooms. Loved by educators.</h2>
+        <p class="section-lead">Teachers told us they needed better tools to truly engage students. Planeteers gives them a ready-to-run session that amazes even the most skeptical teacher.</p>
+      </div>
+      <ul class="feature-list">
+        <li>
+          <span class="feat-icon">📦</span>
+          <span><strong>Classroom kit:</strong> Everything a teacher needs in one box — no preparation required beyond reading a one-pager.</span>
+        </li>
+        <li>
+          <span class="feat-icon">🌐</span>
+          <span><strong>Culturally adaptable:</strong> Tested across India and Switzerland. Scenarios and language can be localised for any market.</span>
+        </li>
+        <li>
+          <span class="feat-icon">📚</span>
+          <span><strong>Curriculum-aligned:</strong> Integrates with existing sustainability, ethics, and social studies lessons — not a disruption, an enhancement.</span>
+        </li>
+        <li>
+          <span class="feat-icon">🔄</span>
+          <span><strong>Expansion packs:</strong> New scenarios keep the game fresh across school years. Partner with educational publishers for deeper integration.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- JOIN
+  <section id="join" class="join-section">
+    <div class="join-inner">
+      <p class="section-tag">Join the movement</p>
+      <h2>Education should feel like play.</h2>
+      <p>If you believe learning should be inspirational and memorable — whether you're a teacher, school, investor, or just a human who cares — we'd love to have you with us.</p>
+      <div class="email-form">
+        <input type="email" placeholder="your@school.edu" />
+        <button type="button">Stay in the loop</button>
+      </div>
+      <p class="join-note">No spam. Just meaningful updates as we grow. 🌱</p>
+    </div>
+  </section>
+   -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Planet<span>eers</span></div>
+    <p>© 2025 Planeteers. Making sustainability tangible, one classroom at a time.</p>
+    <nav>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#teachers">Teachers</a></li>
+        <li><a href="#join">Contact</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+</body>
+</html>
