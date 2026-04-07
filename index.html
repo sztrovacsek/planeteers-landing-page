@@ -259,8 +259,8 @@
       position: relative;
       overflow: hidden;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1, 1fr);
       gap: 12px;
       padding: 24px;
     }
@@ -279,14 +279,6 @@
     .board-cell:hover { transform: scale(1.06) rotate(2deg); }
 
     .board-cell:nth-child(1) { animation-delay: 0.1s; background: #d4f0b0; }
-    .board-cell:nth-child(2) { animation-delay: 0.2s; background: #fde9c0; }
-    .board-cell:nth-child(3) { animation-delay: 0.3s; background: #c8e8f8; }
-    .board-cell:nth-child(4) { animation-delay: 0.4s; background: #f8d8c0; }
-    .board-cell:nth-child(5) { animation-delay: 0.5s; background: var(--earth); font-size: 1.4rem; color: var(--cream); font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem; }
-    .board-cell:nth-child(6) { animation-delay: 0.6s; background: #e0d4f8; }
-    .board-cell:nth-child(7) { animation-delay: 0.7s; background: #c8f0e0; }
-    .board-cell:nth-child(8) { animation-delay: 0.8s; background: #f8e8c0; }
-    .board-cell:nth-child(9) { animation-delay: 0.9s; background: #f0c8c8; }
 
     @keyframes cellPop {
       from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
@@ -567,6 +559,23 @@
       opacity: 0.5;
     }
 
+    /* ── OUR STORY ── */
+    .story-section {
+      background: var(--earth);
+      color: var(--cream);
+      padding: 6rem 3rem;
+    }
+
+    .story-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+      
+    .story-section .section-tag { color: var(--sun); }
+    .story-section h2 { color: var(--cream); }
+    .story-section .section-lead { color: var(--cream); opacity: 0.8; margin-bottom: 0; }
+
+
     /* ── FOOTER ── */
     footer {
       background: var(--sky);
@@ -644,26 +653,25 @@
     <div class="hero-visual">
       <div class="game-board">
         <div class="board-bg">
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
-          <div class="board-cell">💵</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">💵</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
+          <div class="board-cell">
+            <img 
+                src="IMG_5758.jpg" 
+                alt="Hero illustration"
+                class="board-cell"
+                height="350"
+            >
+          </div>
         </div>
         <div class="board-badges">
-          <span class="badge">💵  Cost</span>
-          <span class="badge">😊  Health</span>
-          <span class="badge">🌳  Planet</span>
+          <span class="badge">💰 Cost</span>
+          <span class="badge">❤️ Health</span>
+          <span class="badge">🌳 Planet</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
+  <!-- STATS
   <div class="stats-strip">
     <div class="stat-item">
       <div class="stat-num">ETH</div>
@@ -678,6 +686,7 @@
       <div class="stat-label">Founded in 2026</div>
     </div>
   </div>
+  -->
 
   <!-- HOW IT WORKS -->
   <section id="how" class="section">
@@ -745,18 +754,29 @@
         <button type="button">Stay in the loop</button>
       </div>
       <p class="join-note">No spam. Just meaningful updates as we grow. 🌱</p>
+      -->
     </div>
-    -->
+  </section>
+
+  <!-- STORY -->
+  <section id="story" class="story-section">
+    <div class="story-inner">
+      <p class="section-tag">Our story</p>
+      <h2>A group of students</h2>
+      <p>We are learning how to build a startup. We teamed up, to create this game and make it a successful social-impact business.</p>
+      <p>We are guided by excellent tutors and supported by the Univeristy of Zurich, Startup Campus Switzerland and Innosuisse.</p>
+    </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Planeteers</div>
-    <p>© 2025 Planeteers. Making sustainability tangible, one classroom at a time.</p>
+    <p>© 2026 Planeteers. Making sustainability tangible, one classroom at a time.</p>
     <nav>
       <ul>
         <li><a href="#how">How it works</a></li>
         <li><a href="#teachers">Teachers</a></li>
+        <li><a href="#story">Our story</a></li>
         <li><a href="#join">Contact</a></li>
       </ul>
     </nav>
