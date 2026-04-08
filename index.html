@@ -11,16 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --earth: #2d5016;
-      --moss: #4a7c2f;
-      --leaf: #7ab648;
-      --sun: #f5c842;
-      --sky: #d4ecd4;
-      --sand: #f7f0e0;
-      --bark: #3d2b1a;
+      --earth: #60a35c; /* main green */
+      --moss: #396237; /* main green but darker */
+      --mist: #dfecdf; /* main green but lighter */
+      --leaf: #7cc577;  /* green */
+      --sky: #b3e3f6;  /* blue */
+      --sun: #f9d24b;  /* yellow */
+      --coral: #f59a72;  /* red */
+      --black: #040503;  /* black */
       --warm: #e8dcc8;
-      --coral: #e06b3a;
-      --cream: #faf6ee;
+      --sand: #f7f0e0;
+      --cream: #fefbf3;  /* bg cream */
     }
 
     html { scroll-behavior: smooth; }
@@ -28,7 +29,7 @@
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
-      color: var(--bark);
+      color: var(--black);
       overflow-x: hidden;
     }
 
@@ -52,7 +53,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 3rem;
-      background: rgba(250, 246, 238, 0.85);
+      background: var(--cream);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(74, 124, 47, 0.12);
     }
@@ -75,7 +76,7 @@
 
     nav ul a {
       text-decoration: none;
-      color: var(--bark);
+      color: var(--black);
       font-size: 0.9rem;
       font-weight: 500;
       opacity: 0.75;
@@ -142,7 +143,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--sky);
+      background: var(--mist);
       color: var(--earth);
       font-size: 0.78rem;
       font-weight: 600;
@@ -173,7 +174,7 @@
     .hero-sub {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: var(--bark);
+      color: var(--black);
       opacity: 0.8;
       max-width: 500px;
       margin-bottom: 2.5rem;
@@ -258,8 +259,8 @@
       position: relative;
       overflow: hidden;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1, 1fr);
       gap: 12px;
       padding: 24px;
     }
@@ -278,14 +279,6 @@
     .board-cell:hover { transform: scale(1.06) rotate(2deg); }
 
     .board-cell:nth-child(1) { animation-delay: 0.1s; background: #d4f0b0; }
-    .board-cell:nth-child(2) { animation-delay: 0.2s; background: #fde9c0; }
-    .board-cell:nth-child(3) { animation-delay: 0.3s; background: #c8e8f8; }
-    .board-cell:nth-child(4) { animation-delay: 0.4s; background: #f8d8c0; }
-    .board-cell:nth-child(5) { animation-delay: 0.5s; background: var(--earth); font-size: 1.4rem; color: var(--cream); font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem; }
-    .board-cell:nth-child(6) { animation-delay: 0.6s; background: #e0d4f8; }
-    .board-cell:nth-child(7) { animation-delay: 0.7s; background: #c8f0e0; }
-    .board-cell:nth-child(8) { animation-delay: 0.8s; background: #f8e8c0; }
-    .board-cell:nth-child(9) { animation-delay: 0.9s; background: #f0c8c8; }
 
     @keyframes cellPop {
       from { opacity: 0; transform: scale(0.5) rotate(-10deg); }
@@ -303,7 +296,7 @@
 
     .badge {
       background: white;
-      border: 2px solid var(--sky);
+      border: 2px solid var(--mist);
       border-radius: 100px;
       padding: 0.3rem 0.85rem;
       font-size: 0.72rem;
@@ -465,7 +458,7 @@
 
     /* ── TESTIMONIALS ── */
     .testimonials {
-      background: var(--sky);
+      background: var(--mist);
       padding: 5rem 3rem;
     }
 
@@ -538,7 +531,7 @@
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
       background: white;
-      color: var(--bark);
+      color: var(--black);
       outline: none;
       transition: border-color 0.2s;
     }
@@ -566,10 +559,27 @@
       opacity: 0.5;
     }
 
+    /* ── OUR STORY ── */
+    .story-section {
+      background: var(--earth);
+      color: var(--cream);
+      padding: 6rem 3rem;
+    }
+
+    .story-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+      
+    .story-section .section-tag { color: var(--sun); }
+    .story-section h2 { color: var(--cream); }
+    .story-section .section-lead { color: var(--cream); opacity: 0.8; margin-bottom: 0; }
+
+
     /* ── FOOTER ── */
     footer {
-      background: var(--bark);
-      color: var(--cream);
+      background: var(--sky);
+      color: var(--black);
       padding: 2.5rem 3rem;
       display: flex;
       align-items: center;
@@ -590,7 +600,7 @@
     }
 
     footer nav ul { gap: 1.5rem; }
-    footer nav ul a { font-size: 0.82rem; color: var(--cream); }
+    footer nav ul a { font-size: 0.82rem; color: var(--black); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -614,28 +624,19 @@
 <body>
 
   <!-- NAV -->
-  <nav>
-    <div class="nav-logo">Planet<span>eers</span></div>
-    <ul>
-      <li><a href="#how">How it works</a></li>
-      <li><a href="#teachers">For Teachers</a></li>
-      <li><a href="#story">Our Story</a></li>
-      <li><a href="#join" class="nav-cta">Get Notified</a></li>
-    </ul>
-  </nav>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
       <div class="hero-tag">Sustainability Education in Primary Schools · Ages 7-11</div>
-      <h1>Where kids play the planet back to balance</h1>
+      <h1>Where kids play <em>the planet</em> back to balance</h1>
       <blockquote class="hero-quote">
         "The world needs a life balanced with money, humans, and nature."
         <cite>— A 7-year-old, after playing Planeteers</cite>
       </blockquote>
       <p class="hero-sub">A discussion-based board game that teaches children to navigate the real trade-offs between cost, health, and the environment — through play, not lectures.</p>
       <div class="btn-group">
-        <a href="#demo" class="btn-primary">See the demo →</a>
+        <a href="https://planeteers.lovable.app/" target="_blank" class="btn-primary">See the demo →</a>
         <a href="#story" class="btn-secondary">Our story</a>
       </div>
     </div>
@@ -643,26 +644,25 @@
     <div class="hero-visual">
       <div class="game-board">
         <div class="board-bg">
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
-          <div class="board-cell">💵</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">💵</div>
-          <div class="board-cell">🌳</div>
-          <div class="board-cell">😊</div>
+          <div class="board-cell">
+            <img 
+                src="IMG_5758.jpg" 
+                alt="Hero illustration"
+                class="board-cell"
+                height="350"
+            >
+          </div>
         </div>
         <div class="board-badges">
-          <span class="badge">💵  Cost</span>
-          <span class="badge">😊  Health</span>
-          <span class="badge">🌳  Planet</span>
+          <span class="badge">💰 Cost</span>
+          <span class="badge">❤️ Health</span>
+          <span class="badge">🌳 Planet</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
+  <!-- STATS
   <div class="stats-strip">
     <div class="stat-item">
       <div class="stat-num">ETH</div>
@@ -677,6 +677,7 @@
       <div class="stat-label">Founded in 2026</div>
     </div>
   </div>
+  -->
 
   <!-- HOW IT WORKS -->
   <section id="how" class="section">
@@ -731,29 +732,42 @@
     </div>
   </section>
 
-  <!-- JOIN
+  <!-- JOIN -->
   <section id="join" class="join-section">
     <div class="join-inner">
       <p class="section-tag">Join the movement</p>
       <h2>Education should feel like play.</h2>
       <p>If you believe learning should be inspirational and memorable — whether you're a teacher, school, investor, or just a human who cares — we'd love to have you with us.</p>
+      <p>Reach out to Parinitha Mundra: pari.vish24@gmail.com</p>
+      <!--
       <div class="email-form">
         <input type="email" placeholder="your@school.edu" />
         <button type="button">Stay in the loop</button>
       </div>
       <p class="join-note">No spam. Just meaningful updates as we grow. 🌱</p>
+      -->
     </div>
   </section>
-   -->
+
+  <!-- STORY -->
+  <section id="story" class="story-section">
+    <div class="story-inner">
+      <p class="section-tag">Our story</p>
+      <h2>A group of students</h2>
+      <p>We are learning how to build a startup. We teamed up, to create this game and make it a successful social-impact business.</p>
+      <p>We are guided by excellent tutors and supported by the Univeristy of Zurich, Startup Campus Switzerland and Innosuisse.</p>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Planet<span>eers</span></div>
-    <p>© 2025 Planeteers. Making sustainability tangible, one classroom at a time.</p>
+    <div class="footer-logo"><img src="logo.png" height="50"/></div>
+    <p>© 2026 Planeteers. Making sustainability tangible, one classroom at a time.</p>
     <nav>
       <ul>
         <li><a href="#how">How it works</a></li>
         <li><a href="#teachers">Teachers</a></li>
+        <li><a href="#story">Our story</a></li>
         <li><a href="#join">Contact</a></li>
       </ul>
     </nav>
