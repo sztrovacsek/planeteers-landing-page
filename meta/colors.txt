@@ -1,0 +1,13 @@
+# Colors
+
+bg-cream: fefbf3
+main-black: 040503
+main-green: 60a35c
+
+
+# letters
+green: 7cc577
+yellow: f9d24b
+red: f59a72
+blue: b3e3f6
+
