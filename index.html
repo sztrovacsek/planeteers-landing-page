@@ -115,7 +115,7 @@
       padding: 7rem 3rem 5rem;
       gap: 4rem;
       position: relative;
-      overflow: hidden;
+      overflow: clip; /* clips the blob without affecting scroll/layout */
     }
 
     .hero::after {
@@ -161,13 +161,15 @@
       padding: 0.35rem 1rem;
       border-radius: 100px;
       margin-bottom: 1.75rem;
+      white-space: normal;
+      max-width: 100%;
     }
 
     .hero-tag::before { content: '🌱'; font-size: 1rem; }
 
     h1 {
       font-family: 'Fraunces', serif;
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
       font-weight: 900;
       line-height: 1.0;
       letter-spacing: -0.03em;
