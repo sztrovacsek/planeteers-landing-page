@@ -39,7 +39,7 @@
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
       color: var(--black);
-      overflow-x: hidden;
+      overflow-x: auto; /*was: hidden */
     }
 
     /* ── NOISE TEXTURE OVERLAY ── */
@@ -115,7 +115,7 @@
       padding: 7rem 3rem 5rem;
       gap: 4rem;
       position: relative;
-      overflow: clip; /* clips the blob without affecting scroll/layout */
+      overflow: auto; /* was: clip. clips the blob without affecting scroll/layout */
     }
 
     .hero::after {
