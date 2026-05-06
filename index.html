@@ -79,6 +79,26 @@
 
     footer nav ul a:hover { opacity: 1; }
 
+    /* ── TITLE BAR ── */
+    .title-bar {
+      background: var(--cream);
+      padding: 3rem 3rem 2rem;
+      text-align: center;
+      border-bottom: 2px solid var(--earth);
+      position: relative;
+      z-index: 50;
+    }
+
+    .title-text {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3.5rem, 15vw, 8rem);
+      font-weight: 900;
+      color: var(--earth);
+      letter-spacing: -0.03em;
+      margin: 0;
+      padding: 0;
+    }
+
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -652,6 +672,11 @@
   </style>
 </head>
 <body>
+
+  <!-- TITLE BAR -->
+  <header class="title-bar">
+    <h1 class="title-text">Planeteers</h1>
+  </header>
 
   <!-- NAV -->
 
