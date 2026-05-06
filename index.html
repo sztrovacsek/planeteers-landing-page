@@ -535,6 +535,7 @@
 
     .email-form {
       display: flex;
+      flex-direction: column;
       gap: 0.75rem;
       width: 100%;
       margin: 0 0 1rem;
@@ -578,7 +579,7 @@
 
     .join-actions {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       margin-bottom: 2rem;
     }
@@ -804,19 +805,45 @@
       <p>If you believe learning should be inspirational and memorable — whether you're a teacher, school, investor, or just a human who cares — we'd love to have you with us.</p>
 
       <div class="join-actions">
-        <div class="join-card">          <h3>Fill out our survey</h3>
+        <div class="join-card">
+          <h3>Fill out our survey</h3>
           <p>Help us improve Planeteers by sharing your insights as a primary school teacher. Your feedback shapes the future of sustainability education.</p>
           <a class="btn-secondary" href="https://forms.cloud.microsoft/e/ZMak5RSsQ0" target="_blank" rel="noopener noreferrer">Take the survey</a>
         </div>
 
-        <div class="join-card">          <h3>Contact us directly</h3>
+        <div class="join-card">
+          <h3>Contact us directly</h3>
           <p>Have questions or want to get involved? Reach out to our team. Email our founder, Pari at pari.vish24@gmail.com</p>
           <a class="btn-secondary" href="mailto:pari.vish24@gmail.com" target="_blank" >Email our founder</a>
+        </div>
+
+        <div class="join-card">
+          <h3>Subscribe to our newsletter</h3>
+          <p>Subscribe to our newsletter for updates, and early access news.</p>
+          <form class="email-form" onsubmit="return sendNewsletterEmail(event)">
+            <label class="sr-only" for="newsletter-email">Email address</label>
+            <input id="newsletter-email" type="email" placeholder="your@school.edu" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="join-note">Coming soon. 🌱</p>
         </div>
       </div>
 
     </div>
   </section>
+
+  <script>
+    function sendNewsletterEmail(event) {
+      event.preventDefault();
+      var emailInput = document.getElementById('newsletter-email');
+      var email = emailInput.value.trim();
+      if (!email) return false;
+      var subject = encodeURIComponent('Planeteers newsletter signup');
+      var body = encodeURIComponent('Please add this email to the newsletter list:%0D%0A%0D%0A' + email);
+      window.location.href = 'mailto:hanna.kollo@gmail.com?subject=' + subject + '&body=' + body;
+      return false;
+    }
+  </script>
 
   <!-- STORY -->
   <section id="story" class="story-section">
