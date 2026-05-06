@@ -26,17 +26,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --earth: #60a35c; /* main green */
-      --moss: #396237; /* main green but darker */
-      --mist: #dfecdf; /* main green but lighter */
+      --earth: #5c9f63; /* deep green */
+      --moss: #35643c; /* darker green */
+      --mist: #d9eef9; /* light sky */
       --leaf: #7cc577;  /* green */
-      --sky: #b3e3f6;  /* blue */
-      --sun: #f9d24b;  /* yellow */
-      --coral: #f59a72;  /* red */
-      --black: #040503;  /* black */
-      --warm: #e8dcc8;
-      --sand: #f7f0e0;
-      --cream: #fefbf3;  /* bg cream */
+      --sky: #9fc6f1;  /* muted blue */
+      --sun: #f8c940;  /* warm yellow */
+      --coral: #ed705e;  /* warm red */
+      --black: #121212;  /* dark text */
+      --warm: #f6e5ae;
+      --sand: #f4eadf;
+      --cream: #fbf9f2;  /* bg cream */
     }
 
     html { scroll-behavior: smooth; }
@@ -271,8 +271,8 @@
       height: 100%;
       background: var(--warm);
       border-radius: 28px;
-      border: 3px solid rgba(74,124,47,0.2);
-      box-shadow: 0 30px 80px rgba(45, 80, 22, 0.18), 0 2px 0 rgba(255,255,255,0.8) inset;
+      border: 3px solid rgba(92,159,99,0.2);
+      box-shadow: 0 30px 80px rgba(69, 95, 51, 0.18), 0 2px 0 rgba(255,255,255,0.8) inset;
       position: relative;
       overflow: hidden;
       display: grid;
@@ -395,13 +395,13 @@
       background: var(--sand);
       border-radius: 20px;
       padding: 2rem;
-      border: 1px solid rgba(74,124,47,0.1);
+      border: 1px solid rgba(92,159,99,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .pillar:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(45,80,22,0.12);
+      box-shadow: 0 20px 50px rgba(69,95,51,0.12);
     }
 
     .pillar-icon {
@@ -497,7 +497,7 @@
       background: white;
       border-radius: 20px;
       padding: 2rem;
-      box-shadow: 0 4px 24px rgba(45,80,22,0.07);
+      box-shadow: 0 4px 24px rgba(69,95,51,0.07);
     }
 
     .test-quote {
@@ -543,7 +543,7 @@
     .email-form input {
       flex: 1;
       padding: 0.9rem 1.4rem;
-      border: 2px solid rgba(74,124,47,0.25);
+      border: 2px solid rgba(92,159,99,0.25);
       border-radius: 100px;
       font-family: 'DM Sans', sans-serif;
       font-size: 0.95rem;
