@@ -39,14 +39,16 @@
       --cream: #fbf9f2;  /* bg cream */
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
       color: var(--black);
-      overflow-x: auto; /*was: hidden */
+      overflow-x: hidden;
     }
+
+    img { max-width: 100%; height: auto; }
 
     /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
@@ -59,58 +61,23 @@
       opacity: 0.5;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 3rem;
-      background: var(--cream);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(74, 124, 47, 0.12);
-    }
-
-    .nav-logo {
-      font-family: 'Fraunces', serif;
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--earth);
-      letter-spacing: -0.02em;
-    }
-
-    .nav-logo span { color: var(--leaf); }
-
-    nav ul {
+    /* ── FOOTER NAV ── */
+    footer nav ul {
       list-style: none;
       display: flex;
-      gap: 2.5rem;
+      gap: 1.5rem;
     }
 
-    nav ul a {
+    footer nav ul a {
       text-decoration: none;
       color: var(--black);
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       font-weight: 500;
       opacity: 0.75;
       transition: opacity 0.2s;
     }
 
-    nav ul a:hover { opacity: 1; }
-
-    .nav-cta {
-      background: var(--earth);
-      color: var(--cream) !important;
-      opacity: 1 !important;
-      padding: 0.55rem 1.4rem;
-      border-radius: 100px;
-      font-weight: 600 !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--moss) !important; }
+    footer nav ul a:hover { opacity: 1; }
 
     /* ── HERO ── */
     .hero {
@@ -121,8 +88,10 @@
       padding: 7rem 3rem 5rem;
       gap: 4rem;
       position: relative;
-      overflow: auto; /* was: clip. clips the blob without affecting scroll/layout */
+      overflow: clip;
     }
+
+    .hero > * { min-width: 0; }
 
     .hero::after {
       content: '';
@@ -334,8 +303,6 @@
       text-align: center;
     }
 
-    .stat-item {}
-
     .stat-num {
       font-family: 'Fraunces', serif;
       font-size: 2.8rem;
@@ -354,7 +321,7 @@
     /* ── HOW IT WORKS ── */
     .section {
       padding: 6rem 3rem;
-      max-width: min(1200px, 90%);
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -432,7 +399,7 @@
     }
 
     .teachers-inner {
-      max-width: min(1200px, 90%);
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -480,7 +447,7 @@
     }
 
     .testimonials-inner {
-      max-width: min(1200px, 90%);
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -526,7 +493,7 @@
     }
 
     .join-inner {
-      max-width: min(1200px, 90%);
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -631,7 +598,7 @@
     }
 
     .story-inner {
-      max-width: min(1200px, 90%);
+      max-width: 1200px;
       margin: 0 auto;
     }
       
@@ -656,6 +623,8 @@
       font-size: 1.3rem;
     }
 
+    .footer-logo img { height: 50px; width: auto; }
+
     .footer-logo span { color: var(--leaf); }
 
     footer p {
@@ -663,19 +632,16 @@
       opacity: 0.5;
     }
 
-    footer nav ul { gap: 1.5rem; }
-    footer nav ul a { font-size: 0.82rem; color: var(--black); }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      nav ul { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 6rem 1rem 3rem; margin: 5px 5px 5px 5px; gap: 3rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+      footer nav ul { flex-wrap: wrap; justify-content: center; }
       .hero::after { display: none; }
       .stats-strip { grid-template-columns: repeat(2, 1fr); }
       .pillars { grid-template-columns: 1fr; }
       .teachers-inner { grid-template-columns: 1fr; gap: 3rem; }
       .test-grid { grid-template-columns: 1fr; }
+      .join-actions { grid-template-columns: 1fr; }
       .section { padding: 4rem 1.5rem; }
       .teachers-section { padding: 4rem 1.5rem; }
       .testimonials { padding: 4rem 1.5rem; }
