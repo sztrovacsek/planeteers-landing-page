@@ -83,7 +83,10 @@
     .title-bar {
       background: var(--earth);
       padding: 3rem 3rem 2rem;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
       border-bottom: 2px solid var(--earth);
       position: relative;
       z-index: 50;
@@ -91,12 +94,17 @@
 
     .title-text {
       font-family: 'Fredoka One', cursive;
-      font-size: clamp(3.5rem, 15vw, 8rem);
+      font-size: clamp(3rem, 13vw, 7rem);
       font-weight: 400;
-      color: var(--cream);
+      color: var(--sun);
       letter-spacing: -0.03em;
       margin: 0;
       padding: 0;
+    }
+
+    .title-logo {
+      width: 60px;
+      height: 60px;
     }
 
     /* ── HERO ── */
@@ -675,6 +683,7 @@
 
   <!-- TITLE BAR -->
   <header class="title-bar">
+    <img src="favicon-512x512.png" alt="Planeteers Logo" class="title-logo">
     <h1 class="title-text">Planeteers</h1>
   </header>
 
