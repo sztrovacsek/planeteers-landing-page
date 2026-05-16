@@ -81,7 +81,7 @@
 
     /* ── TITLE BAR ── */
     .title-bar {
-      background: var(--earth);
+      background: var(--cream);
       padding: 3rem 3rem 2rem;
       display: flex;
       justify-content: center;
@@ -96,7 +96,7 @@
       font-family: 'Fredoka One', sans-serif;
       font-size: clamp(3rem, 13vw, 7rem);
       font-weight: 400;
-      color: var(--sun);
+      color: var(--earth);
       letter-spacing: -0.03em;
       margin: 0;
       padding: 0;
@@ -110,6 +110,7 @@
 
     /* ── HERO ── */
     .hero {
+      background: var(--earth);
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -118,6 +119,7 @@
       gap: 4rem;
       position: relative;
       overflow: clip;
+      border-bottom: 2px solid var(--earth);
     }
 
     .hero > * { min-width: 0; }
@@ -177,7 +179,7 @@
       font-weight: 900;
       line-height: 1.0;
       letter-spacing: -0.03em;
-      color: var(--earth);
+      color: var(--cream);
       margin-bottom: 1.5rem;
     }
 
@@ -189,7 +191,7 @@
     .hero-sub {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: var(--black);
+      color: var(--cream);
       opacity: 0.8;
       max-width: 100%;
       margin-bottom: 1.5rem;
@@ -202,7 +204,7 @@
       font-family: 'Nunito', sans-serif;
       font-size: 1.1rem;
       font-style: italic;
-      color: var(--earth);
+      color: var(--cream);
       opacity: 0.9;
     }
 
@@ -222,8 +224,8 @@
 
     .btn-primary {
       display: inline-block;
-      background: var(--earth);
-      color: var(--cream);
+      background: var(--cream);
+      color: var(--earth);
       text-decoration: none;
       padding: 0.9rem 2rem;
       border-radius: 100px;
@@ -232,12 +234,12 @@
       transition: transform 0.2s, background 0.2s;
     }
 
-    .btn-primary:hover { background: var(--moss); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
 
     .btn-secondary {
       display: inline-block;
-      border: 2px solid var(--earth);
-      color: var(--earth);
+      border: 2px solid var(--cream);
+      color: var(--cream);
       text-decoration: none;
       padding: 0.9rem 2rem;
       border-radius: 100px;
@@ -576,7 +578,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--sky);
+      background: var(--cream);
       color: var(--black);
       padding: 2.5rem 3rem;
       display: flex;
@@ -648,7 +650,7 @@
       </p>
       <div class="btn-group">
         <a href="https://planeteers.lovable.app/?mode=hybrid" target="_blank" class="btn-primary">See the demo →</a>
-        <a href="#story" class="btn-secondary">Our story</a>
+        <a href="#teachers" class="btn-secondary">For teachers</a>
       </div>
     </div>
 
@@ -731,7 +733,7 @@
         <p class="section-tag">For teachers</p>
         <h2>Play the game</h2>
         <p class="section-lead">
-          Hello teachers, we are so thrilled that you are with us! If you hold the game kit in your hand, this message is for you.
+          Hello teachers, we are so thrilled that you are with us! If you hold the game kit in your hand, this message is for you...
         </p>
         &nbsp;
         <p class="section-lead">
@@ -749,8 +751,7 @@
       <ul class="feature-list">
         <li>
           <span class="feat-icon">📦</span>
-          <span><strong>Game kit:</strong> Everything a teacher needs is one small box with the game cards, and (optionally) an account to the digital
-            app. The game can be also played fully offline.</span>
+          <span><strong>Game kit:</strong> Everything a teacher needs is one small box with the game cards and an account with access to the digital facilitator. The game can be also played fully offline.</span>
         </li>
         <li>
           <span class="feat-icon">🌎</span>
